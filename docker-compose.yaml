@@ -1,0 +1,28 @@
+version: "3.8" # Docker Compose file format version
+
+services: # Define the containers/services in your application
+  backend: # First service - Rust backend
+    build: # Build configuration
+      context: ./backend # Directory containing the Dockerfile
+      dockerfile: Dockerfile # Name of the Dockerfile to use
+    ports: # Port mapping
+      - "8080:8080" # Host port:Container port
+    environment: # Environment variables
+      - DATABASE_URL=your_database_connection_string # Example database connection
+    networks: # Network configuration
+      - app-network # Connect to the defined network
+
+  frontend: # Second service - Next.js frontend
+    build:
+      context: ./frontend # Frontend project directory
+      dockerfile: Dockerfile # Frontend Dockerfile
+    ports:
+      - "3000:3000" # Expose frontend port
+    depends_on: # Ensure backend starts before frontend
+      - backend
+    networks:
+      - app-network # Same network as backend
+
+networks: # Network definition
+  app-network: # Custom network name
+    driver: bridge # Standard Docker network driver
