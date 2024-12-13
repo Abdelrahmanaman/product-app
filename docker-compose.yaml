@@ -1,14 +1,12 @@
-version: "3.8" # Docker Compose file format version
-
 services: # Define the containers/services in your application
   backend: # First service - Rust backend
     build: # Build configuration
-      context: ./backend # Directory containing the Dockerfile
-      dockerfile: Dockerfile # Name of the Dockerfile to use
+      context: ./backend
+      dockerfile: Dockerfile
     ports: # Port mapping
-      - "8080:8080" # Host port:Container port
+      - "8000:8000" # Host port:Container port
     environment: # Environment variables
-      - DATABASE_URL=your_database_connection_string # Example database connection
+      - RUST_LOG=info
     networks: # Network configuration
       - app-network # Connect to the defined network
 
