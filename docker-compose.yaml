@@ -31,7 +31,7 @@ services: # Define the containers/services in your application
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5555:5555"
     networks:
       - app-network
 
